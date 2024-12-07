@@ -1,4 +1,4 @@
-package com.demo.smartShop.dto;
+package com.demo.smartShop.dto.response;
 
 import com.demo.smartShop.entity.enums.CustomerTier;
 import lombok.AllArgsConstructor;
@@ -6,17 +6,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateClientResponse {
-    private Long clientId;
+public class ClientDTO {
+    private Long id;
     private String nom;
     private String email;
     private CustomerTier tier;
-
-    // Credentials for login
-    private String username;
-    private String message;
+    private int totalOrders;
+    private BigDecimal totalSpent;
+    private LocalDateTime firstOrderDate;
+    private LocalDateTime lastOrderDate;
 }

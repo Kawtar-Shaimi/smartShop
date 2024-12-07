@@ -1,4 +1,4 @@
-package com.demo.smartShop.dto;
+package com.demo.smartShop.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,11 +11,10 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderItemDTO {
+public class ProductDTO {
     private Long id;
-    private Long productId;
-    private String productName;
-    private int quantity;
-    private BigDecimal unitPrice;
-    private BigDecimal totalLine;
+    private String nom;
+    private BigDecimal price;
+    private int stock;
+    private boolean deleted;
 }

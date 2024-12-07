@@ -1,6 +1,6 @@
 package com.demo.smartShop.mapper;
 
-import com.demo.smartShop.dto.ProductDTO;
+import com.demo.smartShop.dto.response.ProductDTO;
 import com.demo.smartShop.entity.Product;
 import org.mapstruct.Mapper;
 

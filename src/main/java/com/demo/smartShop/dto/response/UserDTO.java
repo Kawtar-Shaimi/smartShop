@@ -1,4 +1,4 @@
-package com.demo.smartShop.dto;
+package com.demo.smartShop.dto.response;
 
 import com.demo.smartShop.entity.enums.UserRole;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
     private Long id;
     private String username;
-    private String password;
     private UserRole role;
     private Long clientId;
 }

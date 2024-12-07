@@ -1,4 +1,4 @@
-package com.demo.smartShop.dto;
+package com.demo.smartShop.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,18 +12,12 @@ import javax.validation.constraints.NotBlank;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateClientRequest {
+public class UpdateClientRequest {
 
     @NotBlank(message = "Name is required")
     private String nom;
 
-    @Email(message = "Invalid email format")
     @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
     private String email;
-
-    @NotBlank(message = "Username is required")
-    private String username;
-
-    @NotBlank(message = "Password is required")
-    private String password;
 }

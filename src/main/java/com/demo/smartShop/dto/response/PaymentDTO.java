@@ -1,4 +1,4 @@
-package com.demo.smartShop.dto;
+package com.demo.smartShop.dto.response;
 
 import com.demo.smartShop.entity.enums.PaymentStatus;
 import com.demo.smartShop.entity.enums.PaymentType;
@@ -16,29 +16,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PaymentDTO {
     private Long id;
-
-    @javax.validation.constraints.NotNull(message = "Order ID is required")
     private Long orderId;
-
     private int paymentNumber;
-
-    @javax.validation.constraints.NotNull(message = "Amount is required")
-    @javax.validation.constraints.Positive(message = "Amount must be positive")
     private BigDecimal amount;
-
-    @javax.validation.constraints.NotNull(message = "Payment type is required")
     private PaymentType type;
-
     private PaymentStatus status;
     private LocalDateTime paymentDate;
     private LocalDateTime cashingDate;
-
-    // Required for CHEQUE and VIREMENT
     private String reference;
-
-    // Required for CHEQUE and VIREMENT
     private String bank;
-
-    // Required for CHEQUE
     private LocalDateTime dueDate;
 }

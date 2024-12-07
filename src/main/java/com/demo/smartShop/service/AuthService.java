@@ -1,38 +1,14 @@
 package com.demo.smartShop.service;
 
-import com.demo.smartShop.entity.User;
-import com.demo.smartShop.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
+import com.demo.smartShop.dto.response.UserDTO;
 
-import java.util.Optional;
+import javax.servlet.http.HttpSession;
 
-@Service
-@RequiredArgsConstructor
-public class AuthService {
+public interface AuthService {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    UserDTO login(String username, String password, HttpSession session);
 
-    public User login(String username, String password) {
-        System.out.println(" Login attempt - Username: " + username);
+    void logout(HttpSession session);
 
-        Optional<User> userOpt = userRepository.findByUsername(username);
-        if (userOpt.isPresent()) {
-            User user = userOpt.get();
-            System.out.println(" User found: " + user.getUsername());
-
-            // Use BCrypt to verify password
-            if (passwordEncoder.matches(password, user.getPassword())) {
-                System.out.println(" Password match! Login successful");
-                return user;
-            } else {
-                System.out.println(" Password mismatch!");
-            }
-        } else {
-            System.out.println(" User not found: " + username);
-        }
-        throw new RuntimeException("Invalid username or password");
-    }
+    UserDTO getCurrentUser(HttpSession session);
 }

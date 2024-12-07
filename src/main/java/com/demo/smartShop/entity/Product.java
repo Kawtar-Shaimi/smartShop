@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,7 +14,6 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Where(clause = "deleted = false")
 public class Product {
 
     @Id
@@ -24,6 +22,8 @@ public class Product {
 
     @Column(nullable = false)
     private String nom;
+
+    private String description;
 
     @Column(nullable = false)
     private BigDecimal price;
