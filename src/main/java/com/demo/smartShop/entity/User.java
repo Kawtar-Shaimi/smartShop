@@ -1,8 +1,8 @@
 package com.demo.smartShop.entity;
 
 import com.demo.smartShop.entity.enums.UserRole;
-import jakarta.persistence.*;
 import lombok.Data;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -23,5 +23,4 @@ public class User {
 
     @OneToOne(mappedBy = "user")
     private Client client;
-
 }
