@@ -25,4 +25,8 @@ public class AuthService {
     public void logout() {
         sessionService.destroySession();
     }
+
+    public boolean isAuthenticated() {
+        return sessionService.isAuthenticated();
+    }
 }

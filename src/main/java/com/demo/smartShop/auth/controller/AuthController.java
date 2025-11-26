@@ -1,6 +1,6 @@
-package com.demo.smartShop.controller;
+package com.demo.smartShop.auth.controller;
 
-import com.demo.smartShop.auth.dto.LoginRequestDTO;  // ⬅️ Va marcher maintenant
+import com.demo.smartShop.dto.LoginRequestDTO;
 import com.demo.smartShop.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
