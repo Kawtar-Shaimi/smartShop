@@ -1,4 +1,4 @@
-package com.demo.smartShop.dto;
+package com.demo.smartShop.auth.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
