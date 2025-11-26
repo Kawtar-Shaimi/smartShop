@@ -1,6 +1,6 @@
 package com.demo.smartShop.auth.controller;
 
-import com.demo.smartShop.auth.dto.LoginRequestDTO;  // ⬅️ IMPORT CORRECT
+import com.demo.smartShop.auth.dto.LoginRequestDTO;
 import com.demo.smartShop.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
