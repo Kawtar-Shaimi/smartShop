@@ -1,7 +1,7 @@
-package com.demo.smartShop.mapper;
+package com.demo.smartShop.auth.mapper;
 
 import com.demo.smartShop.entity.User;
-import com.demo.smartShop.dto.UserResponseDTO;
+import com.demo.smartShop.auth.dto.UserResponseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
