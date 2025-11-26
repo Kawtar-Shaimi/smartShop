@@ -1,7 +1,7 @@
-package com.demo.smartShop.service;
+package com.demo.smartShop.service.auth;
 
-import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PasswordService {
