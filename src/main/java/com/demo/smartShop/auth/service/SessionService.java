@@ -1,4 +1,4 @@
-package com.demo.smartShop.service.auth;
+package com.demo.smartShop.auth.service;
 
 import com.demo.smartShop.entity.User;
 import com.demo.smartShop.entity.enums.UserRole;
