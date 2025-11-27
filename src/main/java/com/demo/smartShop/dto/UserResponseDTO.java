@@ -1,4 +1,4 @@
-package com.demo.smartShop.auth.dto;
+package com.demo.smartShop.dto;
 
 import com.demo.smartShop.entity.enums.UserRole;
 import lombok.Data;

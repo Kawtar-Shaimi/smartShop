@@ -1,4 +1,4 @@
-package com.demo.smartShop.auth.service;
+package com.demo.smartShop.service;
 
 import com.demo.smartShop.entity.User;
 import com.demo.smartShop.repository.UserRepository;
