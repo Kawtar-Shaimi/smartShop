@@ -3,30 +3,36 @@ package com.demo.smartShop.service;
 import com.demo.smartShop.entity.User;
 import com.demo.smartShop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AuthService {
+
     private final UserRepository userRepository;
-    private final SessionService sessionService;
-    private final PasswordService passwordService;
+    private final PasswordEncoder passwordEncoder;
 
-    public boolean login(String username, String password) {
-        User user = userRepository.findByUsername(username).orElse(null);
+    public User login(String username, String password) {
+        System.out.println(" Login attempt - Username: " + username);
 
-        if (user != null && passwordService.checkPassword(password, user.getPassword())) {
-            sessionService.createSession(user);
-            return true;
+        Optional<User> userOpt = userRepository.findByUsername(username);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            System.out.println(" User found: " + user.getUsername());
+
+            // Use BCrypt to verify password
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                System.out.println(" Password match! Login successful");
+                return user;
+            } else {
+                System.out.println(" Password mismatch!");
+            }
+        } else {
+            System.out.println(" User not found: " + username);
         }
-        return false;
-    }
-
-    public void logout() {
-        sessionService.destroySession();
-    }
-
-    public boolean isAuthenticated() {
-        return sessionService.isAuthenticated();
+        throw new RuntimeException("Invalid username or password");
     }
 }
