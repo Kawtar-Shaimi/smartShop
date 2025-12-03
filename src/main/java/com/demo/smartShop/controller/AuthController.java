@@ -1,12 +1,19 @@
 package com.demo.smartShop.controller;
 
-import com.demo.smartShop.dto.LoginRequestDTO;
+import com.demo.smartShop.dto.UserDTO;
+import com.demo.smartShop.entity.User;
+import com.demo.smartShop.mapper.UserMapper;
 import com.demo.smartShop.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -14,29 +21,28 @@ import jakarta.validation.Valid;
 public class AuthController {
 
     private final AuthService authService;
+    private final UserMapper userMapper;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDTO loginRequest) {
-        boolean success = authService.login(loginRequest.getUsername(), loginRequest.getPassword());
+    public ResponseEntity<UserDTO> login(@RequestBody Map<String, String> credentials, HttpServletRequest request) {
+        String username = credentials.get("username");
+        String password = credentials.get("password");
 
-        if (success) {
-            return ResponseEntity.ok().body("Login successful");
-        } else {
-            return ResponseEntity.status(401).body("Invalid credentials");
-        }
+        User user = authService.login(username, password);
+        UserDTO userDTO = userMapper.toDTO(user);
+
+        HttpSession session = request.getSession();
+        session.setAttribute("user", userDTO);
+
+        return ResponseEntity.ok(userDTO);
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout() {
-        authService.logout();
-        return ResponseEntity.ok().body("Logout successful");
-    }
-
-    @GetMapping("/me")
-    public ResponseEntity<?> getCurrentUser() {
-        if (!authService.isAuthenticated()) {
-            return ResponseEntity.status(401).body("Not authenticated");
+    public ResponseEntity<Void> logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
         }
-        return ResponseEntity.ok().body("User is logged in");
+        return ResponseEntity.ok().build();
     }
 }
