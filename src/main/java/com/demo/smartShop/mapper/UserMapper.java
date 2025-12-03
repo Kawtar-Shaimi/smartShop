@@ -1,13 +1,16 @@
 package com.demo.smartShop.mapper;
 
-import com.demo.smartShop.entity.User;
 import com.demo.smartShop.dto.UserDTO;
+import com.demo.smartShop.entity.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UserMapper {
-    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+    @Mapping(target = "password", ignore = true) // Don't expose password in DTO
+    @Mapping(source = "client.id", target = "clientId")
+    UserDTO toDTO(User user);
 
-    UserDTO toDto(User user);
+    @Mapping(source = "clientId", target = "client.id")
+    User toEntity(UserDTO userDTO);
 }
