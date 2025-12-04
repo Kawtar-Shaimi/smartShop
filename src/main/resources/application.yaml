@@ -1,35 +1,27 @@
 server:
-  port: 8080
-  servlet:
-    session:
-      timeout: 30m
+  port: 8081
 
 spring:
-  application:
-    name: smartShop
-
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/smartshop_db}
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:password}
-    driver-class-name: ${DB_DRIVER:org.postgresql.Driver}
+    # PostgreSQL Configuration
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driverClassName: org.postgresql.Driver
 
   jpa:
+    # database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
+    show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-        show_sql: true
-    open-in-view: false
 
-  sql:
-    init:
-      platform: postgresql
+  # h2:
+  #   console:
+  #     enabled: true
 
-logging:
-  level:
-    com.demo.smartShop: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+smartshop:
+  tva-rate: 0.20
