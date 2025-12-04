@@ -60,10 +60,7 @@ public class OrderService {
 
             if (product.getStock() < itemDTO.getQuantity()) {
                 order.setStatus(OrderStatus.REJECTED);
-                // We still save it as REJECTED or throw? Requirement says "PENDING -> REJECTED : si stock insuffisant".
-                // I will throw exception or save as REJECTED. Saving as REJECTED is better for history.
-                // But for now, let's just throw to stop processing, or build it as REJECTED.
-                // Let's build it as REJECTED and return.
+
             }
 
             OrderItem item = new OrderItem();

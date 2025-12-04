@@ -1,4 +1,4 @@
-package com.microtech.smartshop.mapper;
+package com.demo.smartShop.mapper;
 
 import com.demo.smartShop.dto.PaymentDTO;
 import com.demo.smartShop.entity.Payment;
