@@ -53,18 +53,17 @@ public class AuthInterceptor implements HandlerInterceptor {
                 uri.startsWith("/api/setup/create-admin");
     }
 
-    /**
-     * Handle CLIENT role access control
-     * CLIENT can only:
-     * - View products (GET /api/products)
-     * - View own orders (GET /api/orders/my-orders)
-     * - View own profile (GET /api/clients/{id})
-     * - Logout
-     */
+
     private boolean handleClientAccess(String uri, String method, UserDTO user, HttpServletResponse response) throws Exception {
         // Allow logout
         if (uri.startsWith("/api/auth/logout")) {
             return true;
+        }
+
+        // Block all POST, PUT, DELETE for CLIENTS
+        if (method.equals("POST") || method.equals("PUT") || method.equals("DELETE")) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Clients cannot create, modify or delete resources");
+            return false;
         }
 
         // Allow viewing products (read-only)
@@ -72,9 +71,15 @@ public class AuthInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        // Allow viewing own orders
+        // Allow viewing own orders ONLY via /my-orders endpoint
         if (uri.equals("/api/orders/my-orders") && method.equals("GET")) {
             return true;
+        }
+
+        // Block access to /api/orders (list all orders - ADMIN only)
+        if (uri.equals("/api/orders") || uri.startsWith("/api/orders/")) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied: Use /api/orders/my-orders to view your orders");
+            return false;
         }
 
         // Allow viewing own profile only
@@ -88,6 +93,12 @@ public class AuthInterceptor implements HandlerInterceptor {
             } catch (NumberFormatException e) {
                 // Invalid ID format, deny access
             }
+        }
+
+        // Block access to list all clients
+        if (uri.equals("/api/clients") && method.equals("GET")) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied: Clients cannot view all clients");
+            return false;
         }
 
         // Deny all other access for CLIENT
