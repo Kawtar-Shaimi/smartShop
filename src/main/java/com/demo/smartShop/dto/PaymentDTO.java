@@ -32,7 +32,13 @@ public class PaymentDTO {
     private PaymentStatus status;
     private LocalDateTime paymentDate;
     private LocalDateTime cashingDate;
+
+    // Required for CHEQUE and VIREMENT
     private String reference;
+
+    // Required for CHEQUE and VIREMENT
     private String bank;
+
+    // Required for CHEQUE
     private LocalDateTime dueDate;
 }

@@ -44,9 +44,26 @@ public class PaymentService {
             throw new IllegalArgumentException("Payment amount exceeds remaining amount");
         }
 
+        // Validate required fields based on payment type
+        if (paymentDTO.getType() == PaymentType.CHEQUE || paymentDTO.getType() == PaymentType.VIREMENT) {
+            if (paymentDTO.getReference() == null || paymentDTO.getReference().trim().isEmpty()) {
+                throw new IllegalArgumentException("Reference is required for " + paymentDTO.getType() + " payments");
+            }
+            if (paymentDTO.getBank() == null || paymentDTO.getBank().trim().isEmpty()) {
+                throw new IllegalArgumentException("Bank is required for " + paymentDTO.getType() + " payments");
+            }
+        }
+
+        if (paymentDTO.getType() == PaymentType.CHEQUE) {
+            if (paymentDTO.getDueDate() == null) {
+                throw new IllegalArgumentException("Due date is required for CHEQUE payments");
+            }
+        }
+
         Payment payment = paymentMapper.toEntity(paymentDTO);
         payment.setOrder(order);
         payment.setPaymentDate(LocalDateTime.now());
+
 
         if (payment.getType() == PaymentType.ESPECES) {
             payment.setStatus(PaymentStatus.ENCAISSE);
@@ -55,12 +72,11 @@ public class PaymentService {
             payment.setStatus(PaymentStatus.EN_ATTENTE);
         }
 
-
+        // Determine payment number
         List<Payment> existingPayments = paymentRepository.findByOrderId(order.getId());
         payment.setPaymentNumber(existingPayments.size() + 1);
 
         Payment savedPayment = paymentRepository.save(payment);
-
 
         order.setRemainingAmount(order.getRemainingAmount().subtract(payment.getAmount()));
         orderRepository.save(order);
