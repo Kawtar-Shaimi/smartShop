@@ -26,4 +26,6 @@ public interface ClientService {
     void updateClientStats(Long clientId, BigDecimal orderAmount);
 
     List<OrderDTO> getClientOrders(Long clientId);
+
+    List<ClientDTO> getTopClientsByTotalSpent(int limit);
 }

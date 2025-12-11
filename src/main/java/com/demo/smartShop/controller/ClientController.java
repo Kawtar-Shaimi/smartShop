@@ -108,28 +108,12 @@ public class ClientController {
         }
     }
 
-//    @GetMapping("/top")
-//    public ResponseEntity<List<ClientDTO>> getSpenters(@RequestParam(defaultValue = "5") int limit, HttpServletRequest request){
-//        List<ClientDTO> topClients = clientService.getTopClientsByOrderAmount(limit);
-//        return ResponseEntity.ok(topClients);
-//    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @GetMapping("/top")
+    public ResponseEntity<List<ClientDTO>> getTopClients(
+            @RequestParam(defaultValue = "10") int limit,
+            HttpServletRequest request) {
+        requireAdmin(request);
+        List<ClientDTO> topClients = clientService.getTopClientsByTotalSpent(limit);
+        return ResponseEntity.ok(topClients);
+    }
 }

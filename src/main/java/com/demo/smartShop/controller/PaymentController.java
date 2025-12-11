@@ -66,6 +66,13 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.validatePayment(id));
     }
 
+    @PostMapping("/{id}/cancel")
+    public ResponseEntity<PaymentDTO> cancelPayment(@PathVariable Long id, HttpServletRequest request) {
+        // Only ADMIN can cancel payments
+        requireAdmin(request);
+        return ResponseEntity.ok(paymentService.cancelPayment(id));
+    }
+
     // Helper methods
     private Long getCurrentClientId(HttpServletRequest request) {
         return sessionService.getCurrentClientId(request.getSession())

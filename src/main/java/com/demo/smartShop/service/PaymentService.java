@@ -10,4 +10,6 @@ public interface PaymentService {
     PaymentDTO validatePayment(Long paymentId);
 
     List<PaymentDTO> getPaymentsByOrder(Long orderId);
+
+    PaymentDTO cancelPayment(Long paymentId);
 }

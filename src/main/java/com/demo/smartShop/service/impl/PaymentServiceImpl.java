@@ -108,4 +108,30 @@ public class PaymentServiceImpl implements PaymentService {
                 .map(paymentMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    @Transactional
+    public PaymentDTO cancelPayment(Long paymentId) {
+        Payment payment = paymentRepository.findById(paymentId)
+                .orElseThrow(() -> new EntityNotFoundException("Payment not found"));
+
+        if (payment.getStatus() == PaymentStatus.ENCAISSE) {
+            throw new IllegalStateException("Cannot cancel a cashed payment");
+        }
+
+        if (payment.getStatus() == PaymentStatus.ANNULEE) {
+            throw new IllegalStateException("Payment is already cancelled");
+        }
+
+        // Update payment status to ANNULEE
+        payment.setStatus(PaymentStatus.ANNULEE);
+        Payment cancelledPayment = paymentRepository.save(payment);
+
+        // Restore the remaining amount to the order
+        Order order = payment.getOrder();
+        order.setRemainingAmount(order.getRemainingAmount().add(payment.getAmount()));
+        orderRepository.save(order);
+
+        return paymentMapper.toDTO(cancelledPayment);
+    }
 }

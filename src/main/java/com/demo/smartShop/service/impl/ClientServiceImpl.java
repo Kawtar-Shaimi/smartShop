@@ -131,7 +131,8 @@ public class ClientServiceImpl implements ClientService {
 
         clientRepository.delete(client);
     }
-    //met à jour les statistiques d'un client après qu'une commande soit confirmée.
+
+    // met à jour les statistiques d'un client après qu'une commande soit confirmée.
     @Override
     @Transactional
     public void updateClientStats(Long clientId, BigDecimal orderAmount) {
@@ -180,5 +181,14 @@ public class ClientServiceImpl implements ClientService {
         } else {
             client.setTier(CustomerTier.BASIC);
         }
+    }
+
+    @Override
+    public List<ClientDTO> getTopClientsByTotalSpent(int limit) {
+        return clientRepository.findAll().stream()
+                .sorted(Comparator.comparing(Client::getTotalSpent).reversed())
+                .limit(limit)
+                .map(clientMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }
