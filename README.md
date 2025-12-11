@@ -51,15 +51,24 @@ SmartShop est une application backend e-commerce professionnelle développée av
 - Création de commandes avec items multiples
 - Calcul automatique des totaux (sous-total, taxes, remises)
 - Application de codes promotionnels
+<<<<<<< HEAD
 - Statuts de commandes (PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED)
+=======
+- Statuts de commandes (PENDING, CONFIRMED, REJECTED, CANCELLED)
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 - Mise à jour automatique des statistiques clients
 - Groupement des commandes par statut de paiement
 - Statistiques des commandes par statut
 
 ### 💳 Gestion des Paiements
 - Support de paiements multiples par commande
+<<<<<<< HEAD
 - Types de paiement : CASH, CHECK, CREDIT_CARD, BANK_TRANSFER
 - Statuts de paiement : PENDING, COMPLETED, FAILED, REFUNDED
+=======
+- Types de paiement : ESPECES, VIREMENT, CHEQUE
+- Statuts de paiement : EN_ATTENTE, ENCAISSE, REJETE, ANNULEE
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 - Gestion des échéances pour les chèques
 - Mise à jour automatique du montant restant
 
@@ -179,8 +188,11 @@ Connectez-vous à PostgreSQL et créez la base de données :
 
 ```sql
 CREATE DATABASE smartshop_db;
+<<<<<<< HEAD
 CREATE USER smartshop_user WITH PASSWORD 'your_password';
 GRANT ALL PRIVILEGES ON DATABASE smartshop_db TO smartshop_user;
+=======
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 ```
 
 ### 3. Configurer les Variables d'Environnement
@@ -284,6 +296,12 @@ Connexion utilisateur
 }
 ```
 
+<<<<<<< HEAD
+=======
+<img width="1866" height="913" alt="image" src="https://github.com/user-attachments/assets/23d69fe1-3c88-4f15-88f1-07a70179f9bc" />
+
+
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 #### POST `/api/auth/logout`
 Déconnexion utilisateur
 
@@ -309,10 +327,21 @@ Récupérer tous les clients (ADMIN uniquement)
   }
 ]
 ```
+<<<<<<< HEAD
+=======
+<img width="1864" height="901" alt="image" src="https://github.com/user-attachments/assets/47a8a0e3-754e-418a-816a-67000f2b3e57" />
+
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 
 #### GET `/api/clients/{id}`
 Récupérer un client par ID
 
+<<<<<<< HEAD
+=======
+<img width="1858" height="906" alt="image" src="https://github.com/user-attachments/assets/a8459e0a-a656-4891-bac6-d7fe05502464" />
+
+
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 #### POST `/api/clients`
 Créer un nouveau client (ADMIN uniquement)
 
@@ -325,6 +354,12 @@ Créer un nouveau client (ADMIN uniquement)
 }
 ```
 
+<<<<<<< HEAD
+=======
+<img width="1865" height="900" alt="image" src="https://github.com/user-attachments/assets/25196535-c1d8-4049-a188-5b9abd460a92" />
+
+
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 #### PUT `/api/clients/{id}`
 Mettre à jour un client
 
@@ -358,9 +393,21 @@ Récupérer tous les produits (non supprimés)
 ]
 ```
 
+<<<<<<< HEAD
 #### GET `/api/products/{id}`
 Récupérer un produit par ID
 
+=======
+<img width="1869" height="907" alt="image" src="https://github.com/user-attachments/assets/f4e866c3-af10-42a7-a61e-d43cc04703a6" />
+
+
+#### GET `/api/products/{id}`
+Récupérer un produit par ID
+
+<img width="1871" height="909" alt="image" src="https://github.com/user-attachments/assets/29c15897-a638-473f-b4bf-35fd586aface" />
+
+
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 #### POST `/api/products`
 Créer un nouveau produit (ADMIN uniquement)
 
@@ -374,9 +421,21 @@ Créer un nouveau produit (ADMIN uniquement)
 }
 ```
 
+<<<<<<< HEAD
 #### PUT `/api/products/{id}`
 Mettre à jour un produit (ADMIN uniquement)
 
+=======
+<img width="1867" height="903" alt="image" src="https://github.com/user-attachments/assets/fd5fa702-0dda-407f-900a-0ec4f590e9fe" />
+
+
+#### PUT `/api/products/{id}`
+Mettre à jour un produit (ADMIN uniquement)
+
+<img width="1868" height="902" alt="image" src="https://github.com/user-attachments/assets/62c03c13-7c1f-473a-aeee-ff513065017e" />
+
+
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 #### DELETE `/api/products/{id}`
 Supprimer un produit (soft delete, ADMIN uniquement)
 
@@ -413,9 +472,21 @@ Récupérer toutes les commandes
 ]
 ```
 
+<<<<<<< HEAD
 #### GET `/api/orders/{id}`
 Récupérer une commande par ID
 
+=======
+<img width="1872" height="906" alt="image" src="https://github.com/user-attachments/assets/fbc0f3ad-1e0e-4a45-a417-157c0ed383ef" />
+
+
+#### GET `/api/orders/{id}`
+Récupérer une commande par ID
+
+<img width="1864" height="898" alt="image" src="https://github.com/user-attachments/assets/857ebcf6-966d-47bf-9852-9b478ac67d4b" />
+
+
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 #### POST `/api/orders`
 Créer une nouvelle commande
 
@@ -436,6 +507,7 @@ Créer une nouvelle commande
   ]
 }
 ```
+<<<<<<< HEAD
 
 #### PUT `/api/orders/{id}/status`
 Mettre à jour le statut d'une commande (ADMIN uniquement)
@@ -446,6 +518,10 @@ Mettre à jour le statut d'une commande (ADMIN uniquement)
   "status": "SHIPPED"
 }
 ```
+=======
+<img width="1875" height="902" alt="image" src="https://github.com/user-attachments/assets/0335d149-8a0b-4b39-8596-45abd508fb3d" />
+
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 
 #### GET `/api/orders/stats/by-status`
 Obtenir les statistiques des commandes par statut
@@ -488,10 +564,21 @@ Récupérer tous les paiements
   }
 ]
 ```
+<<<<<<< HEAD
+=======
+<img width="1865" height="911" alt="image" src="https://github.com/user-attachments/assets/c6820746-d19c-438c-bd84-469f6d8fa5ee" />
+
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 
 #### GET `/api/payments/order/{orderId}`
 Récupérer les paiements d'une commande
 
+<<<<<<< HEAD
+=======
+<img width="1871" height="905" alt="image" src="https://github.com/user-attachments/assets/01ede644-f735-4ea8-a978-e8cf900f694c" />
+
+
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 #### POST `/api/payments`
 Créer un nouveau paiement
 
@@ -507,6 +594,7 @@ Créer un nouveau paiement
 }
 ```
 
+<<<<<<< HEAD
 #### PUT `/api/payments/{id}/status`
 Mettre à jour le statut d'un paiement (ADMIN uniquement)
 
@@ -516,6 +604,9 @@ Mettre à jour le statut d'un paiement (ADMIN uniquement)
   "status": "COMPLETED"
 }
 ```
+=======
+<img width="1868" height="904" alt="image" src="https://github.com/user-attachments/assets/2a3cdce2-813d-4897-9d08-fab848f45814" />
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 
 ---
 
@@ -538,9 +629,21 @@ Récupérer tous les codes promo (ADMIN uniquement)
 ]
 ```
 
+<<<<<<< HEAD
 #### GET `/api/promo-codes/{code}`
 Récupérer un code promo par code
 
+=======
+<img width="1874" height="902" alt="image" src="https://github.com/user-attachments/assets/441028ef-a803-4a3b-a282-d1e46a105f03" />
+
+
+#### GET `/api/promo-codes/{code}`
+Récupérer un code promo par code
+
+<img width="1869" height="907" alt="image" src="https://github.com/user-attachments/assets/b0e150cc-87d9-4806-b9a9-26298e79b43b" />
+
+
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 #### POST `/api/promo-codes`
 Créer un nouveau code promo (ADMIN uniquement)
 
@@ -553,12 +656,18 @@ Créer un nouveau code promo (ADMIN uniquement)
   "maxUsage": 50
 }
 ```
+<<<<<<< HEAD
 
 #### PUT `/api/promo-codes/{id}`
 Mettre à jour un code promo (ADMIN uniquement)
 
 #### DELETE `/api/promo-codes/{id}`
 Supprimer un code promo (ADMIN uniquement)
+=======
+<img width="1868" height="905" alt="image" src="https://github.com/user-attachments/assets/035ea34a-e5ce-409d-87fb-8de22078650f" />
+
+#### POST /api/promo-codes/{code}/deactivate
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 
 ---
 
@@ -752,11 +861,14 @@ GET http://localhost:8081/api/promo-codes/PROMO-2024
 Expected: 200 OK si actif et usage disponible
 ```
 
+<<<<<<< HEAD
 ### Captures d'Écran Postman
 
 > **Note:** Pour ajouter vos captures d'écran Postman, placez-les dans le dossier `screenshots/postman/` et référencez-les ci-dessous.
 
 ---
+=======
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
 
 ## 📁 Structure du Projet
 
@@ -793,6 +905,7 @@ smartShop/
 
 **Kawtar Shaimi**
 
+<<<<<<< HEAD
 - GitHub: [@Kawtar-Shaimi](https://github.com/Kawtar-Shaimi)
 - Email: contact@kawtarshaimi.com
 
@@ -823,3 +936,10 @@ Pour toute question ou problème, veuillez ouvrir une issue sur le [repository G
   <p>Développé avec ❤️ par Kawtar Shaimi</p>
   <p>© 2024 SmartShop. Tous droits réservés.</p>
 </div>
+=======
+- GitHub: [Kawtar-Shaimi](https://github.com/Kawtar-Shaimi)
+- Email: kawtar.shaimi8@gmail.com
+
+---
+
+>>>>>>> e06b58ff5c289d9f9269cb9dd636bf4eb89ddcb7
