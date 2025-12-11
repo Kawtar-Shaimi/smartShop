@@ -25,14 +25,6 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-/**
- * Tests unitaires pour AuthController
- * 
- * Ces tests vérifient les endpoints d'authentification:
- * - POST /api/auth/login
- * - POST /api/auth/logout
- * - GET /api/auth/me
- */
 @WebMvcTest(AuthController.class)
 @DisplayName("AuthController Tests")
 class AuthControllerTest {

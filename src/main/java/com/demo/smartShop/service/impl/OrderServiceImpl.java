@@ -5,12 +5,15 @@ import com.demo.smartShop.dto.response.OrderItemDTO;
 import com.demo.smartShop.entity.Client;
 import com.demo.smartShop.entity.Order;
 import com.demo.smartShop.entity.OrderItem;
+import com.demo.smartShop.entity.Payment;
 import com.demo.smartShop.entity.Product;
 import com.demo.smartShop.entity.enums.CustomerTier;
 import com.demo.smartShop.entity.enums.OrderStatus;
+import com.demo.smartShop.entity.enums.PaymentType;
 import com.demo.smartShop.mapper.OrderMapper;
 import com.demo.smartShop.repository.ClientRepository;
 import com.demo.smartShop.repository.OrderRepository;
+import com.demo.smartShop.repository.PaymentRepository;
 import com.demo.smartShop.repository.ProductRepository;
 import com.demo.smartShop.service.ClientService;
 import com.demo.smartShop.service.OrderService;
@@ -26,7 +29,9 @@ import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +40,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final ClientRepository clientRepository;
     private final ProductRepository productRepository;
+    private final PaymentRepository paymentRepository;
     private final OrderMapper orderMapper;
     private final ClientService clientService;
 
@@ -83,7 +89,7 @@ public class OrderServiceImpl implements OrderService {
         for (OrderItem item : items) {
             Product product = item.getProduct();
             product.setStock(product.getStock() - item.getQuantity());
-            productRepository.save(product);
+            // productRepository.save(product);
         }
 
         order.setItems(items);
@@ -207,5 +213,15 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO getOrderById(Long id) {
         return orderRepository.findById(id).map(orderMapper::toDTO)
                 .orElseThrow(() -> new EntityNotFoundException("Order not found"));
+    }
+
+    @Override
+    public Map<PaymentType, List<OrderDTO>> getOrdersGroupedByPaymentType() {
+        return paymentRepository.findAll().stream()
+                .collect(Collectors.groupingBy(
+                        Payment::getType,
+                        Collectors.mapping(
+                                payment -> orderMapper.toDTO(payment.getOrder()),
+                                Collectors.toList())));
     }
 }

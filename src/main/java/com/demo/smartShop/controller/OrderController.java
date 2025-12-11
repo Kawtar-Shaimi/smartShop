@@ -1,6 +1,7 @@
 package com.demo.smartShop.controller;
 
 import com.demo.smartShop.dto.response.OrderDTO;
+import com.demo.smartShop.entity.enums.PaymentType;
 import com.demo.smartShop.entity.enums.UserRole;
 import com.demo.smartShop.exception.ForbiddenException;
 import com.demo.smartShop.exception.UnauthorizedException;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -86,6 +89,13 @@ public class OrderController {
         }
 
         return ResponseEntity.ok(orderService.cancelOrder(id));
+    }
+
+    @GetMapping("/grouped-by-payment-type")
+    public ResponseEntity<Map<PaymentType, List<OrderDTO>>> getOrdersGroupedByPaymentType(HttpServletRequest request) {
+        // Only ADMIN can view this report
+        requireAdmin(request);
+        return ResponseEntity.ok(orderService.getOrdersGroupedByPaymentType());
     }
 
     // Helper methods

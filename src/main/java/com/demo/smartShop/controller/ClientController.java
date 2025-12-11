@@ -107,4 +107,29 @@ public class ClientController {
             throw new ForbiddenException("Admin access required");
         }
     }
+
+//    @GetMapping("/top")
+//    public ResponseEntity<List<ClientDTO>> getSpenters(@RequestParam(defaultValue = "5") int limit, HttpServletRequest request){
+//        List<ClientDTO> topClients = clientService.getTopClientsByOrderAmount(limit);
+//        return ResponseEntity.ok(topClients);
+//    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

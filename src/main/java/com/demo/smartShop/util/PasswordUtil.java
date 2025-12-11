@@ -9,12 +9,6 @@ public final class PasswordUtil {
     private PasswordUtil() {
     }
 
-    /**
-     * Hash a plain text password using BCrypt
-     * 
-     * @param password the plain text password
-     * @return the hashed password
-     */
     public static String hash(String password) {
         if (password == null || password.isBlank()) {
             throw new IllegalArgumentException("Password cannot be null or empty");
@@ -22,13 +16,6 @@ public final class PasswordUtil {
         return BCrypt.hashpw(password, BCrypt.gensalt(BCRYPT_ROUNDS));
     }
 
-    /**
-     * Verify a plain text password against a hashed password
-     * 
-     * @param password       the plain text password
-     * @param hashedPassword the hashed password to verify against
-     * @return true if the password matches, false otherwise
-     */
     public static boolean verify(String password, String hashedPassword) {
         if (password == null || hashedPassword == null) {
             return false;

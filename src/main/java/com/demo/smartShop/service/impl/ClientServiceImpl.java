@@ -5,8 +5,10 @@ import com.demo.smartShop.dto.request.UpdateClientRequest;
 import com.demo.smartShop.dto.response.ClientDTO;
 import com.demo.smartShop.dto.response.OrderDTO;
 import com.demo.smartShop.entity.Client;
+import com.demo.smartShop.entity.Order;
 import com.demo.smartShop.entity.User;
 import com.demo.smartShop.entity.enums.CustomerTier;
+import com.demo.smartShop.entity.enums.OrderStatus;
 import com.demo.smartShop.entity.enums.UserRole;
 import com.demo.smartShop.exception.ResourceNotFoundException;
 import com.demo.smartShop.mapper.ClientMapper;
@@ -24,7 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -127,7 +131,7 @@ public class ClientServiceImpl implements ClientService {
 
         clientRepository.delete(client);
     }
-
+    //met à jour les statistiques d'un client après qu'une commande soit confirmée.
     @Override
     @Transactional
     public void updateClientStats(Long clientId, BigDecimal orderAmount) {
